@@ -38,7 +38,8 @@ const categories = [
   ];
 
 document.getElementById('formItem').addEventListener('submit', (e) => {
-  let value_inputan = document.getElementById('keyword').value.toLowerCase();
+  e.preventDefault();
+  var value_inputan = document.getElementById('keyword').value.toLowerCase();
   const filteredData = categories.filter((item) => {
     return item.name.toLowerCase().includes(value_inputan);
   });
@@ -72,6 +73,7 @@ const displayItem = (items) => {
     });
   });
 };
+displayItem(categories);
 
 const addToCart = (itemId) => {
   cartCount++;
@@ -81,4 +83,12 @@ const addToCart = (itemId) => {
   console.log(`Item dengan ID ${itemId} berhasil ditambahkan ke keranjang`);
 };
 
-displayItem(categories);
+let cartCount = 0;
+const cart = document.getElementsByClassName("addCart");
+cart[0].addEventListener('click', (e) => {
+  cartCount++;
+  document.getElementById("cart").innerHTML = `<i class="fas fa-shopping-cart"></i>(${cartCount})`;
+  console.log("Item berhasil ditambahkan");
+});
+
+
